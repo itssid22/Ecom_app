@@ -1,5 +1,7 @@
 import 'package:f_2_app/models/catalog.dart';
+import 'package:f_2_app/utils/routes.dart';
 import 'package:f_2_app/utils/themes.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/src/services/asset_bundle.dart';
@@ -46,7 +48,14 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     var name = "siddhant";
     return Scaffold(
-        backgroundColor: MyTheme.creamColor,
+        // backgroundColor: MyTheme.creamColor,//hum isko comment out karre taki niche card color implement kar sake
+        backgroundColor: context.canvasColor,
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: context.theme.buttonColor,
+          foregroundColor: Colors.white,
+          onPressed: () => Navigator.pushNamed(context, MyRoutes.cartRoute),
+          child: const Icon(CupertinoIcons.cart),
+        ),
         //     appBar: AppBar(title: Text("           Catalog App")),
         //     body: Padding(
         //         padding: const EdgeInsets.all(16.0),
@@ -135,7 +144,7 @@ class CatalogItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              catalog.name.text.lg.color(MyTheme.darkBluishColor).bold.make(),
+              catalog.name.text.lg.color(context.accentColor).bold.make(),
               catalog.desc.text.textStyle(context.captionStyle).make(),
               10.heightBox,
               ButtonBar(

@@ -4,6 +4,7 @@ import 'package:f_2_app/utils/routes.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter/Google_Fonts/Google_Fonts.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -40,7 +41,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     // String name="";
     return Material(
-      color: Colors.white,
+      color: context.canvasColor,
       child: SingleChildScrollView(
         child: Form(
           key: _formKey,
@@ -103,7 +104,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
 
                     Material(
-                      color: Colors.deepPurple,
+                      color: context.theme.buttonColor,
                       borderRadius:
                           BorderRadius.circular(changedButton ? 50 : 8),
                       child: InkWell(
