@@ -1,0 +1,126 @@
+{
+
+"products":[
+
+
+    {
+        "id": 1,
+        "name": "Phone 1",
+        "desc":" mediaTech processor",
+        "price": 1000,
+        "color":"#35505a",
+        "image": "https://m.media-amazon.com/images/I/911TJ1CDbLL._SX679_.jpg"
+    },
+    {
+        "id": 2,
+        "name": " head Phones",
+        "desc": "latest with 5.0 Bluetooth",
+        "price": 1200,
+        "color":"#35505a",
+        "image" : "https://m.media-amazon.com/images/I/71UK5wbPM0L._SX679_.jpg"
+    
+    },
+    {
+        "id": 3,
+        "name": "Fortune oil",
+        "desc":" Healty low fat oil",
+        "price": 1000,
+        "color":"#35503a",
+        "image":"https://m.media-amazon.com/images/I/51TH5xE+2sL.jpg"
+    },
+    {
+        "id": 4,
+        "name": " Acer laptop",
+        "desc": "latest with 5.0 Bluetooth",
+        "price": 11300,
+        "color":"#35500a",
+        "image" : "https://m.media-amazon.com/images/I/71KbRWkW3yL._AC_UY218_.jpg"
+
+    
+    },
+    {
+
+        "id":5,
+        "name": "play station",
+        "desc": "with high performance",
+        "price": 300,
+        "color":"#35500a",
+        "image":"https://m.media-amazon.com/images/I/51051FiD9UL._SX679_.jpg"
+    },
+
+    {
+        "id":6,
+        "name": "Titan watch",
+        "desc": "Titan smart watch with calling",
+        "price": 420,
+        "color":"#35500a",
+        "image":"https://staticimg.titan.co.in/Titan/Catalog/90156AP01_1.jpg?impolicy=pqmed&imwidth=640"
+    },
+    {
+        "id":7,
+        "name": "virelux ps4 controller",
+        "desc": "controller gamepad joystick",
+        "price": 780,
+        "color":"#35500a",
+        "image":"https://m.media-amazon.com/images/I/61m2b-xyiPS._SX450_.jpg"
+    }
+
+   
+
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
