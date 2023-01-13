@@ -43,6 +43,10 @@ class MyTheme {
           color: Colors.white,
           elevation: 3.0,
           iconTheme: IconThemeData(color: Colors.black),
+          // textTheme: Theme.of(context).textTheme,//context.color jo vector se milte uske badle aisa kuch use kar sakte Theme.of(context)
+          // textTheme: Theme.of(context).textTheme.copyWith(
+          //   headline6: context.textTheme.headline6.copyWith(color:Colors.white)
+          // ),
           titleTextStyle: TextStyle(
             color: Colors.black,
             fontSize: 20,
