@@ -70,13 +70,21 @@ class __CartListState extends State<_CartList> {
   final _cart = CartModel();
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: _cart.items.length,
-      itemBuilder: (context, index) => ListTile(
-        leading: Icon(Icons.done),
-        trailing: IconButton(onPressed: () {}, icon: Icon(Icons.remove_circle)),
-        title: _cart.items[index].name.text.make(),
-      ),
-    );
+    return _cart.items.isEmpty
+        ? "Nothing to Show".text.xl3.makeCentered()
+        : ListView.builder(
+            itemCount: _cart.items.length,
+            itemBuilder: (context, index) => ListTile(
+              leading: Icon(Icons.done),
+              trailing: IconButton(
+                  onPressed: () {
+                    _cart.remove(_cart.items[index]);
+                    setState(
+                        () {}); //hum setState isliye likhte hai taki ye bata sake ki ui rebuil hona chahiye
+                  },
+                  icon: Icon(Icons.remove_circle)),
+              title: _cart.items[index].name.text.make(),
+            ),
+          );
   }
 }

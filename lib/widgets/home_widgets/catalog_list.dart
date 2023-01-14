@@ -10,6 +10,7 @@ import 'package:f_2_app/widgets/home_widgets/catalog_image.dart';
 import '../../models/catalog.dart';
 import '../../pages/home_page.dart';
 import '../../utils/themes.dart';
+import 'package:f_2_app/widgets/home_widgets/add_to_cart.dart';
 
 class CatalogList extends StatelessWidget {
   const CatalogList({super.key});
@@ -67,7 +68,7 @@ class CatalogItem extends StatelessWidget {
                 buttonPadding: EdgeInsets.zero,
                 children: [
                   "\$${catalog.price}".text.bold.xl.make(),
-                  _AddToCart(catalog: catalog),
+                  AddToCart(catalog: catalog),
                   // ElevatedButton(
                   //   onPressed: () {},
                   //   style: ButtonStyle(
@@ -86,36 +87,46 @@ class CatalogItem extends StatelessWidget {
   }
 }
 
-class _AddToCart extends StatefulWidget {
-  final Item catalog;
-  const _AddToCart({
-    Key? key,
-    required this.catalog,
-  }) : super(key: key);
 
-  @override
-  State<_AddToCart> createState() => _AddToCartState();
-}
 
-class _AddToCartState extends State<_AddToCart> {
-  bool isAdded = false;
-  @override
-  Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: () {
-        isAdded = isAdded
-            .toggle(); // toggle karne se jo bhi isAdded previous value ka opposite ho jata , yane ki true ho jayenge;
-        final _catalog = CatalogModel();
-        final _cart = CartModel();
-        _cart.Catalog = _catalog;
-        _cart.add(widget.catalog);
 
-        setState(() {});
-      },
-      style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all(context.theme.buttonColor),
-          shape: MaterialStateProperty.all(StadiumBorder())),
-      child: isAdded ? Icon(Icons.done) : "+cart".text.white.make(),
-    );
-  }
-}
+
+
+//  Below code has been added to seperate file named as add_to_cart.dart
+// class _AddToCart extends StatefulWidget {
+//   final Item catalog;
+//   const _AddToCart({
+//     Key? key,
+//     required this.catalog,
+//   }) : super(key: key);
+
+//   @override
+//   State<_AddToCart> createState() => AddToCartState();
+// }
+
+// class AddToCartState extends State<_AddToCart> {
+//   final _cart = CartModel();
+//   @override
+//   Widget build(BuildContext context) {
+//     bool isInCart = _cart.items.contains(widget.catalog) ?? false;
+//     return ElevatedButton(
+//       onPressed: () {
+//         // toggle karne se jo bhi isInCart previous value ka opposite ho jata , yane ki true ho jayenge;
+
+//         if (!isInCart) {
+//           isInCart = isInCart.toggle();
+//           final _catalog = CatalogModel();
+//           // final _cart = CartModel();//humne ise uppar declare kkye hai
+//           _cart.Catalog = _catalog;
+//           _cart.add(widget.catalog);
+
+//           setState(() {});
+//         }
+//       },
+//       style: ButtonStyle(
+//           backgroundColor: MaterialStateProperty.all(context.theme.buttonColor),
+//           shape: MaterialStateProperty.all(StadiumBorder())),
+//       child: isInCart ? Icon(Icons.done) : "+cart".text.white.make(),
+//     );
+//   }
+// }
