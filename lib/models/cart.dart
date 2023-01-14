@@ -1,6 +1,16 @@
 import 'package:f_2_app/models/catalog.dart';
 
 class CartModel {
+  //
+  static final cartModel = CartModel._internal();
+
+  CartModel._internal();
+
+  factory CartModel() => cartModel;
+
+//above is the example of the singleton class
+//
+
   //catalog field
   late CatalogModel _catalog;
 
