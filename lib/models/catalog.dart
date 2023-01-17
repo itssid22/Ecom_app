@@ -4,14 +4,14 @@ import 'dart:convert';
 class CatalogModel {
 //below is the example of singleton class , we create singleton class to avoid creation of new object each time , so by creating a singleton class we render the same object , we thus don't need to create a new object each time
 
-  static final catModel = CatalogModel._internal();
+  // static final catModel = CatalogModel._internal();
 
-  CatalogModel._internal();
+  // CatalogModel._internal();
 
-  factory CatalogModel() => catModel;
+  // factory CatalogModel() => catModel;
 
 //above comes betn the comment a single ton class
-
+//but we are commenting the whole above singleton code because , we have made code more efficient by writting efficient code in Mystore
   static List<Item> items = [];
   //watch video at 4:36
   Item getById(int id) =>

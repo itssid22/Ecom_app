@@ -1,15 +1,21 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:html';
+
+import 'package:vxstate/vxstate.dart';
+
+import 'package:f_2_app/core/store.dart';
 import 'package:f_2_app/models/catalog.dart';
 
 class CartModel {
   //
-  static final cartModel = CartModel._internal();
+  // static final cartModel = CartModel._internal();
 
-  CartModel._internal();
+  // CartModel._internal();
 
-  factory CartModel() => cartModel;
+  // factory CartModel() => cartModel;
 
 //above is the example of the singleton class
-//
+//but we are commenting the whole above singleton code because , we have made code more efficient by writting efficient code in Mystore
 
   //catalog field
   late CatalogModel _catalog;
@@ -22,7 +28,7 @@ class CartModel {
 
   CatalogModel get catalog => _catalog;
 
-  set Catalog(CatalogModel newCatalog) {
+  set catalog(CatalogModel newCatalog) {
     assert(newCatalog != null);
     _catalog = newCatalog;
   }
@@ -42,5 +48,17 @@ class CartModel {
 
   void remove(Item item) {
     _itemIds.remove(item.id);
+  }
+}
+
+class AddMutation extends VxMutation<MyStore> {
+  final Item item;
+  AddMutation({
+    required this.item,
+  });
+  @override
+  perform() {
+    // TODO: implement perform
+    store?.cart._itemIds.add(item.id);
   }
 }

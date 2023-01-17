@@ -2,6 +2,7 @@ import 'package:f_2_app/models/cart.dart';
 import "package:flutter/material.dart";
 import 'package:google_fonts/google_fonts.dart';
 import "package:velocity_x/velocity_x.dart";
+import '../core/store.dart';
 import '../utils/themes.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:f_2_app/utils/themes.dart';
@@ -36,7 +37,8 @@ class _CartTotal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _cart = CartModel();
+    final CartModel _cart = (VxState.store as MyStore).cart;
+    // final _cart = CartModel();
     return SizedBox(
         height: 100,
         child: Row(
@@ -59,17 +61,12 @@ class _CartTotal extends StatelessWidget {
   }
 }
 
-class _CartList extends StatefulWidget {
-  const _CartList({super.key});
-
-  @override
-  State<_CartList> createState() => __CartListState();
-}
-
-class __CartListState extends State<_CartList> {
-  final _cart = CartModel();
+class _CartList extends StatelessWidget {
+  // final _cart = CartModel();//final CartModel likhne ke wajah se hum CartModel _cart  likh rahe hai .
   @override
   Widget build(BuildContext context) {
+    final CartModel _cart =
+        (VxState.store as MyStore).cart; // yaha humne final CartModel likha hai
     return _cart.items.isEmpty
         ? "Nothing to Show".text.xl3.makeCentered()
         : ListView.builder(
@@ -79,8 +76,7 @@ class __CartListState extends State<_CartList> {
               trailing: IconButton(
                   onPressed: () {
                     _cart.remove(_cart.items[index]);
-                    setState(
-                        () {}); //hum setState isliye likhte hai taki ye bata sake ki ui rebuil hona chahiye
+                    // setState(() {}); //hum setState isliye likhte hai taki ye bata sake ki ui rebuil hona chahiye
                   },
                   icon: Icon(Icons.remove_circle)),
               title: _cart.items[index].name.text.make(),

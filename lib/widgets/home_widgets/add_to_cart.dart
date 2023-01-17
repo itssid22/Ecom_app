@@ -4,23 +4,25 @@ import 'package:velocity_x/velocity_x.dart';
 
 import '../../models/cart.dart';
 import '../../models/catalog.dart';
+import 'package:f_2_app/core/store.dart';
 
-class AddToCart extends StatefulWidget {
+class AddToCart extends StatelessWidget {
   final Item catalog;
-  const AddToCart({
+  AddToCart({
     Key? key,
     required this.catalog,
   }) : super(key: key);
 
-  @override
-  State<AddToCart> createState() => AddToCartState();
-}
-
-class AddToCartState extends State<AddToCart> {
   final _cart = CartModel();
   @override
   Widget build(BuildContext context) {
-    bool isInCart = _cart.items.contains(widget.catalog) ?? false;
+    // VxState.listen(context, to: [AddMutation]);
+    // VxState.listen(context, to: [AddMutation]);
+
+    final CartModel _cart = (VxState.store as MyStore).cart;
+    // final CatalogModel _catalog = (VxState.store as MyStore).catalog;//the catalogModel doesn't matter so we are commenting
+
+    bool isInCart = _cart.items.contains(catalog) ?? false;
     return ElevatedButton(
       onPressed: () {
         // toggle karne se jo bhi isInCart previous value ka opposite ho jata , yane ki true ho jayenge;
@@ -29,10 +31,10 @@ class AddToCartState extends State<AddToCart> {
           isInCart = isInCart.toggle();
           final _catalog = CatalogModel();
           // final _cart = CartModel();//humne ise uppar declare kkye hai
-          _cart.Catalog = _catalog;
-          _cart.add(widget.catalog);
+          _cart.catalog = _catalog;
+          _cart.add(catalog);
 
-          setState(() {});
+          // setState(() {});
         }
       },
       style: ButtonStyle(
