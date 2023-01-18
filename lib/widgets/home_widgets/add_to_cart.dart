@@ -17,7 +17,7 @@ class AddToCart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // VxState.listen(context, to: [AddMutation]);
-    // VxState.listen(context, to: [AddMutation]);
+    VxState.watch(context, on: [AddMutation, RemoveMutation]);
 
     final CartModel _cart = (VxState.store as MyStore).cart;
     // final CatalogModel _catalog = (VxState.store as MyStore).catalog;//the catalogModel doesn't matter so we are commenting
@@ -28,11 +28,13 @@ class AddToCart extends StatelessWidget {
         // toggle karne se jo bhi isInCart previous value ka opposite ho jata , yane ki true ho jayenge;
 
         if (!isInCart) {
-          isInCart = isInCart.toggle();
-          final _catalog = CatalogModel();
+          // isInCart = isInCart.toggle();
+          // final _catalog = CatalogModel();
           // final _cart = CartModel();//humne ise uppar declare kkye hai
-          _cart.catalog = _catalog;
-          _cart.add(catalog);
+          // _cart.catalog = _catalog;
+          // _cart.add(catalog);
+
+          AddMutation(item: catalog);
 
           // setState(() {});
         }

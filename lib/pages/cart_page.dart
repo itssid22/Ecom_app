@@ -44,7 +44,13 @@ class _CartTotal extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            "\$${_cart.totalPrice}".text.xl4.make(),
+            VxConsumer(
+                notifications: {},
+                mutations: {RemoveMutation},
+                builder: ((context, store, status) {
+                  return "\$${_cart.totalPrice}".text.xl4.make();
+                })),
+            // "\$${_cart.totalPrice}".text.xl4.make();
             30.widthBox,
             ElevatedButton(
                     onPressed: () {
@@ -65,6 +71,7 @@ class _CartList extends StatelessWidget {
   // final _cart = CartModel();//final CartModel likhne ke wajah se hum CartModel _cart  likh rahe hai .
   @override
   Widget build(BuildContext context) {
+    VxState.watch(context, on: [RemoveMutation]);
     final CartModel _cart =
         (VxState.store as MyStore).cart; // yaha humne final CartModel likha hai
     return _cart.items.isEmpty
@@ -74,10 +81,12 @@ class _CartList extends StatelessWidget {
             itemBuilder: (context, index) => ListTile(
               leading: Icon(Icons.done),
               trailing: IconButton(
-                  onPressed: () {
-                    _cart.remove(_cart.items[index]);
-                    // setState(() {}); //hum setState isliye likhte hai taki ye bata sake ki ui rebuil hona chahiye
-                  },
+                  onPressed: () => RemoveMutation(item: _cart.items[index]),
+                  // {
+                  // _cart.remove(_cart.items[index]);// hum i sline ko uppar wali line remove mutation ke wajah se comment kar rahe hai
+
+                  // setState(() {}); //hum setState isliye likhte hai taki ye bata sake ki ui rebuil hona chahiye
+                  // },
                   icon: Icon(Icons.remove_circle)),
               title: _cart.items[index].name.text.make(),
             ),

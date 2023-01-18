@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:html';
+// import 'dart:html';
+import 'dart:io';
 
 import 'package:vxstate/vxstate.dart';
 
@@ -18,7 +19,7 @@ class CartModel {
 //but we are commenting the whole above singleton code because , we have made code more efficient by writting efficient code in Mystore
 
   //catalog field
-  late CatalogModel _catalog;
+   CatalogModel  _catalog=CatalogModel();
 
   // collection of IDs - store ids of each item
 
@@ -46,9 +47,9 @@ class CartModel {
     _itemIds.add(item.id);
   }
 
-  void remove(Item item) {
-    _itemIds.remove(item.id);
-  }
+  // void remove(Item item) {
+  //   _itemIds.remove(item.id);
+  // }//remove mutation likhne ke wajah se humne ye comment kardiye
 }
 
 class AddMutation extends VxMutation<MyStore> {
@@ -58,7 +59,17 @@ class AddMutation extends VxMutation<MyStore> {
   });
   @override
   perform() {
-    // TODO: implement perform
     store?.cart._itemIds.add(item.id);
+  }
+}
+
+class RemoveMutation extends VxMutation<MyStore> {
+  final Item item;
+  RemoveMutation({
+    required this.item,
+  });
+  @override
+  perform() {
+    store?.cart._itemIds.remove(item.id);
   }
 }
