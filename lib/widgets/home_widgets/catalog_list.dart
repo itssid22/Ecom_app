@@ -17,23 +17,48 @@ class CatalogList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-        shrinkWrap: true,
-        itemCount: CatalogModel.items.length,
-        itemBuilder: ((context, index) {
-          final catalog = CatalogModel.items[
-              index]; //is line ke badle niche wale methods bhi use kar sakte items ko accesss karne ke liye
-          // final catalog = CatalogModel.getByPosition(index);
-          // final catalog = CatalogModel.getById(index);
+    return !context.isMobile
+        ? GridView.builder(
+            shrinkWrap: true,
+            gridDelegate:
+                SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+            itemCount: CatalogModel.items.length,
+            itemBuilder: ((context, index) {
+              final catalog = CatalogModel.items[
+                  index]; //is line ke badle niche wale methods bhi use kar sakte items ko accesss karne ke liye
+              // final catalog = CatalogModel.getByPosition(index);
+              // final catalog = CatalogModel.getById(index);
 
-          return InkWell(
-            child: CatalogItem(catalog: catalog),
-            onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: ((context) => HomeDetailPage(catalog: catalog)))),
-          );
-        }));
+              return InkWell(
+                child: CatalogItem(catalog: catalog),
+                onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: ((context) =>
+                            HomeDetailPage(catalog: catalog)))),
+              );
+            }))
+        :
+        //agar web raha to uppar wala listview.builer nahi to niche wala
+
+        ListView.builder(
+            shrinkWrap: true,
+            itemCount: CatalogModel.items.length,
+            itemBuilder: ((context, index) {
+              final catalog = CatalogModel.items[
+                  index]; //is line ke badle niche wale methods bhi use kar sakte items ko accesss karne ke liye
+              // final catalog = CatalogModel.getByPosition(index);
+              // final catalog = CatalogModel.getById(index);
+
+              return InkWell(
+                child: CatalogItem(catalog: catalog),
+                onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: ((context) =>
+                            HomeDetailPage(catalog: catalog)))),
+              );
+            }));
   }
 }
 
@@ -45,45 +70,56 @@ class CatalogItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return VxBox(
-        child: Row(
-      children: [
-        Hero(
-          tag: Key(catalog.id.toString()),
-          child: CatalogImage(
-            image: catalog.image,
-          ),
+    var children2 = [
+      Hero(
+        tag: Key(catalog.id.toString()),
+        child: CatalogImage(
+          image: catalog.image,
         ),
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              catalog.name.text.lg.color(context.accentColor).bold.make(),
-              catalog.desc.text.textStyle(context.captionStyle).make(),
-              10.heightBox,
-              ButtonBar(
-                alignment: MainAxisAlignment.spaceBetween,
-                // buttonPadding: EdgeInsets.zero,
-                buttonPadding: EdgeInsets.zero,
-                children: [
-                  "\$${catalog.price}".text.bold.xl.make(),
-                  AddToCart(catalog: catalog),
-                  // ElevatedButton(
-                  //   onPressed: () {},
-                  //   style: ButtonStyle(
-                  //       backgroundColor: MaterialStateProperty.all(
-                  //           context.theme.buttonColor),
-                  //       shape: MaterialStateProperty.all(StadiumBorder())),
-                  //   child: "+cart".text.white.make(),
-                  // )//is commented lines ke badle hum yaha _AddToCart class likh rahe hai , jisme humne pura elevatedButton likha hai
-                ],
-              ).pOnly(right: 8.0)
-            ],
-          ),
-        )
-      ],
-    )).color(context.cardColor).roundedSM.square(160).make().py16();
+      ),
+      Expanded(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            catalog.name.text.lg.color(context.accentColor).bold.make(),
+            catalog.desc.text.textStyle(context.captionStyle).make(),
+            10.heightBox,
+            ButtonBar(
+              alignment: MainAxisAlignment.spaceBetween,
+              // buttonPadding: EdgeInsets.zero,
+              buttonPadding: EdgeInsets.zero,
+              children: [
+                "\$${catalog.price}".text.bold.xl.make(),
+                AddToCart(catalog: catalog),
+                // ElevatedButton(
+                //   onPressed: () {},
+                //   style: ButtonStyle(
+                //       backgroundColor: MaterialStateProperty.all(
+                //           context.theme.buttonColor),
+                //       shape: MaterialStateProperty.all(StadiumBorder())),
+                //   child: "+cart".text.white.make(),
+                // )//is commented lines ke badle hum yaha _AddToCart class likh rahe hai , jisme humne pura elevatedButton likha hai
+              ],
+            ).pOnly(right: 8.0)
+          ],
+        ).px(context.isMobile ? 0 : 16),
+      )
+    ];
+    return VxBox(
+            child: context.isMobile
+                ? Row(
+                    children: children2,
+                  )
+                : Column(
+                    children: children2,
+                  ))
+        .color(context.cardColor)
+        .roundedSM
+        .square(160)
+        .make()
+        .py16()
+        .p(context.isMobile ? 0 : 16);
   }
 }
 

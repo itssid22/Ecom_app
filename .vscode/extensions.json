@@ -1,5 +1,6 @@
 {
     "recommendations": [
-        "diemasmichiels.emulate"
+        "diemasmichiels.emulate",
+        "jeroen-meijer.pubspec-assist"
     ]
 }

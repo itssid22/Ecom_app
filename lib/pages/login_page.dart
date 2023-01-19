@@ -30,7 +30,8 @@ class _LoginPageState extends State<LoginPage> {
       await Future.delayed(
         Duration(seconds: 1),
       );
-      await Navigator.pushNamed(context, MyRoutes.HomeRoute);
+      // await Navigator.pushNamed(context, MyRoutes.HomeRoute);// when we implement setPathurl in homepage method so this becomes irrelevant
+      await context.vxNav.push(Uri.parse(MyRoutes.HomeRoute));
       setState(() {
         changedButton = false;
       });
@@ -98,23 +99,14 @@ class _LoginPageState extends State<LoginPage> {
                             return "password length should be atleast 6";
                           }
                         }),
-
                     const SizedBox(
                       height: 30.0,
                     ),
-
                     Material(
                       color: context.theme.buttonColor,
                       borderRadius:
                           BorderRadius.circular(changedButton ? 50 : 8),
                       child: InkWell(
-                        onTap: () => moveToHome(context),
-                        // {
-                        //   // Navigator.pushNamed(context, MyRoutes.HomeRoute);
-                        //
-                        //
-                        // },
-
                         child: AnimatedContainer(
                           duration: Duration(seconds: 1),
                           width: changedButton ? 50 : 150,
@@ -126,26 +118,31 @@ class _LoginPageState extends State<LoginPage> {
                                   "login",
                                   style: TextStyle(color: Colors.white),
                                 ),
-                          // decoration: BoxDecoration(
-                          //   // color: Colors.purple,
-                          //   shape: changedButton?BoxShape.circle:BoxShape.rectangle,
-                          //
-                          // ),
+                          decoration: BoxDecoration(
+                            // color: Colors.purple,
+                            shape: changedButton
+                                ? BoxShape.circle
+                                : BoxShape.rectangle,
+                          ),
                         ),
+                        onTap: () {
+                          Navigator.pushNamed(context, MyRoutes.HomeRoute);
+                        },
                       ),
                     ),
-                    // ElevatedButton(onPressed: (){
-                    //    // print("The button has been pressed");
-                    //   Navigator.pushNamed(context, MyRoutes.HomeRoute);
-                    //
-                    //  }, child: Text("login"),
-                    //
-                    //
-                    //
-                    //  style:TextButton.styleFrom(foregroundColor: Colors.white,backgroundColor: Colors.blue, minimumSize: Size(125, 50),
-                    //  side: BorderSide(color: Colors.cyan),),
-                    //
-                    //  ),
+                    // ElevatedButton(
+                    //   onPressed: () {
+                    //     // print("The button has been pressed");
+                    //     Navigator.pushNamed(context, MyRoutes.HomeRoute);
+                    //   },
+                    //   child: Text("login"),
+                    //   style: TextButton.styleFrom(
+                    //     foregroundColor: Colors.white,
+                    //     backgroundColor: Colors.blue,
+                    //     minimumSize: Size(125, 50),
+                    //     side: BorderSide(color: Colors.cyan),
+                    //   ),
+                    // ),
                   ],
                 ),
               )

@@ -1,3 +1,5 @@
+import 'package:f_2_app/core/store.dart';
+import 'package:f_2_app/models/cart.dart';
 import 'package:f_2_app/models/catalog.dart';
 import 'package:f_2_app/utils/routes.dart';
 import 'package:f_2_app/utils/themes.dart';
@@ -11,6 +13,7 @@ import "package:velocity_x/velocity_x.dart";
 import '../widgets/home_widgets/catalog_header.dart';
 import '../widgets/home_widgets/catalog_image.dart';
 import '../widgets/home_widgets/catalog_list.dart';
+import 'package:http/http.dart' as http;
 
 class HomePage extends StatefulWidget {
   @override
@@ -20,6 +23,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   // This widget is the root of your application.
 
+  final url = "";
   @override
   void initState() {
     // TODO: implement initState
@@ -46,15 +50,23 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    var name = "siddhant";
+    final _cart = (VxState.store as MyStore).cart;
     return Scaffold(
         // backgroundColor: MyTheme.creamColor,//hum isko comment out karre taki niche card color implement kar sake
         backgroundColor: context.canvasColor,
-        floatingActionButton: FloatingActionButton(
-          backgroundColor: context.theme.buttonColor,
-          foregroundColor: Colors.white,
-          onPressed: () => Navigator.pushNamed(context, MyRoutes.cartRoute),
-          child: const Icon(CupertinoIcons.cart),
+        floatingActionButton: VxBuilder(
+          mutations: {AddMutation, RemoveMutation},
+          builder: (context, store, status) => FloatingActionButton(
+            backgroundColor: context.theme.buttonColor,
+            foregroundColor: Colors.white,
+            onPressed: () => Navigator.pushNamed(context, MyRoutes.cartRoute),
+            child: const Icon(CupertinoIcons.cart),
+          ).badge(
+              color: Vx.red500,
+              size: 23,
+              count: _cart.items.length,
+              textStyle:
+                  TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
         ),
         //     appBar: AppBar(title: Text("           Catalog App")),
         //     body: Padding(
